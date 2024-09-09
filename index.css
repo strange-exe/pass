@@ -1,4 +1,4 @@
- @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap');
 *{
 box-sizing: border-box;
 }
@@ -21,7 +21,6 @@ backdrop-filter: blur(4px) saturate(200%);
 background-color: rgba(17, 25, 40, 0.87);
 border-radius: 12px;
 border: 1px solid rgba(255, 255, 255, 0.125);
-}
 }
 .pw-header{
 padding: 1rem;
@@ -89,24 +88,21 @@ margin: 0.75rem 0;
   cursor: pointer;
 }
 
-.pw button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  transform: translate(0, 50%);
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  opacity: 0;
-  background-color: rgb(35, 5, 66);
-  padding: 0.25rem 1rem;
-  font-family: inherit;
-  font-weight: bold;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-}
-
-.pw button:hover {
-  background-color: #4527a0;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
+@media (max-width: 480px) {
+  .pw-container {
+    width: 90%;
+  }
+  .pw {
+    height: 40px;
+    font-size: 1.1rem;
+    padding: 0.5rem;
+  }
+  .pw button {
+    font-size: 1rem;
+    padding: 0.25rem 0.5rem;
+  }
+  .generate {
+    font-size: 1.2rem;
+    padding: 0.75rem;
+  }
 }
