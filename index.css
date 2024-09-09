@@ -5,8 +5,10 @@ box-sizing: border-box;
 body{
 margin: 0;
 font-family: "Poppins", sans-serif;
-background-color: rebeccapurple;
-color: #eee;
+background: #000 url('bg.png') no-repeat center;
+background-size: cover;
+background-attachment: fixed;
+background-position: center;
 display: flex;
 align-items: center;
 justify-content: center;
