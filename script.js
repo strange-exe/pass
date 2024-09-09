@@ -9,7 +9,7 @@ const numberEl = document.getElementById("number");
 const upperLetters = "ABCDEFGHIJKLMNOPQSRTUVWXYZ";
 const lowerLetters = "abcdefghijklmnopqrstuvwxyz";
 const numbers = "0123456789";
-const symbol = "~!@#$%^&*()_+=|";
+const symbol = "!@#$%&*";
 function getLowercase() {
 return lowerLetters[Math.floor(Math.random() * lowerLetters.length)];
 }
@@ -59,6 +59,6 @@ textarea.value = password;
 document.body.appendChild(textarea);
 textarea.select();
 document.execCommand("copy");
+
 textarea.remove();
-alert("password copied to clipboard");
 });
