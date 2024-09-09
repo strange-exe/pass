@@ -1,37 +1,40 @@
-// script.js
-const PwEl = document.getElementById("pw");
-const copyEl = document.getElementById("copy");
-const lenEl = document.getElementById("len");
-const upperEl = document.getElementById("upper");
-const lowerEl = document.getElementById("lower");
-const symbolEl = document.getElementById("symbol");
-const generateEl = document.getElementById("generate");
-const numberEl = document.getElementById("number");
+const pwElement = document.getElementById('pw');
+const generateButton = document.getElementById('generate');
+const copyButton = document.getElementById('copy');
+const lengthInput = document.getElementById('len');
+const upperInput = document.getElementById('upper');
+const lowerInput = document.getElementById('lower');
+const numberInput = document.getElementById('number');
+const symbolInput = document.getElementById('symbol');
 
-const characterSets = [
-  { chars: "abcdefghijklmnopqrstuvwxyz", enabled: lowerEl.checked },
-  { chars: "ABCDEFGHIJKLMNOPQSRTUVWXYZ", enabled: upperEl.checked },
-  { chars: "0123456789", enabled: numberEl.checked },
-  { chars: "!@#$%&*", enabled: symbolEl.checked },
-];
+generateButton.addEventListener('click', generatePassword);
 
 function generatePassword() {
-  const len = lenEl.value;
-  let password = "";
-  for (let i = 0; i < len; i++) {
-    const charSet = characterSets.find(set => set.enabled);
-    if (!charSet) break;
-    password += charSet.chars[Math.floor(Math.random() * charSet.chars.length)];
+  const length = lengthInput.value;
+  const hasUpper = upperInput.checked;
+  const hasLower = lowerInput.checked;
+  const hasNumber = numberInput.checked;
+  const hasSymbol = symbolInput.checked;
+
+  let password = '';
+  const characters = '';
+
+  if (hasUpper) characters += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (hasLower) characters += 'abcdefghijklmnopqrstuvwxyz';
+  if (hasNumber) characters += '0123456789';
+  if (hasSymbol) characters += '!@#$%^&*()_+-={}:<>?';
+
+  for (let i = 0; i < length; i++) {
+    password += characters.charAt(Math.floor(Math.random() * characters.length));
   }
-  PwEl.innerText = password;
-  PwEl.style.opacity = 1; // Make the password visible
+
+  pwElement.textContent = password;
 }
 
-generateEl.addEventListener("click", generatePassword);
+copyButton.addEventListener('click', copyPassword);
 
-copyEl.addEventListener("click", async () => {
-  const password = PwEl.innerText;
-  if (!password) return;
-  await navigator.clipboard.writeText(password);
-  alert("Password copied to clipboard!");
-});
+function copyPassword() {
+  const password = pwElement.textContent;
+  navigator.clipboard.writeText(password);
+  alert('Password copied to clipboard!');
+}
