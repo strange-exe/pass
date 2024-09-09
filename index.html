@@ -1,44 +1,46 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Password Generator</title>
-<link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="pw-container">
-<div class="pw-header">
-<div class="pw">
-<span id="pw">Press the button below</span>
-<button id="copy"> Copy </button>
-</div>
-</div>
-<div class="pw-body">
-<div class="form-control">
-<lable for="length"> Password Length </lable>
-<input id="len" value="10" type="number" min="8" max="30">
-</div>
-<div class="form-control">
-<lable for="upper"> Contain Uppercase Letters </lable>
-<input id="upper" type="checkbox">
-</div>
-<div class="form-control">
-<lable for="lower">Contain Lowercase Letters</lable>
-<input id="lower" type="checkbox">
-</div>
-<div class="form-control">
-<lable for="number">Contain Numbers </lable>
-<input id="number" type="checkbox">
-</div>
-<div class="form-control">
-<lable for="symbol">Contain Symbol</lable>
-<input id="symbol" type="checkbox">
-</div>
-<button class="generate" id="generate">Generate Password</button>
-</div>
-</div>
-<script src="script.js"></script>
+    <div class="pw-container">
+        <div class="pw-header">
+            <h1>Password Generator</h1>
+        </div>
+        <div class="pw-body">
+            <div class="form-control">
+                <label for="len">Password Length:</label>
+                <input type="number" id="len" value="12" min="8" max="128">
+            </div>
+            <div class="form-control">
+                <label for="upper">Uppercase Letters:</label>
+                <input type="checkbox" id="upper" checked>
+            </div>
+            <div class="form-control">
+                <label for="lower">Lowercase Letters:</label>
+                <input type="checkbox" id="lower" checked>
+            </div>
+            <div class="form-control">
+                <label for="number">Numbers:</label>
+                <input type="checkbox" id="number" checked>
+            </div>
+            <div class="form-control">
+                <label for="symbol">Symbols:</label>
+                <input type="checkbox" id="symbol" checked>
+            </div>
+            <button id="generate">Generate Password</button>
+            <button id="copy">Copy Password</button>
+            <div class="pw">
+                <span id="pw"></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
