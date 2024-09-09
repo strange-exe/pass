@@ -1,40 +1,63 @@
-const pwElement = document.getElementById('pw');
-const generateButton = document.getElementById('generate');
-const copyButton = document.getElementById('copy');
-const lengthInput = document.getElementById('len');
-const upperInput = document.getElementById('upper');
-const lowerInput = document.getElementById('lower');
-const numberInput = document.getElementById('number');
-const symbolInput = document.getElementById('symbol');
-
-generateButton.addEventListener('click', generatePassword);
-
+const PwEl = document.getElementById("pw");
+const copyEl = document.getElementById("copy");
+const lenEl = document.getElementById("len");
+const upperEl = document.getElementById("upper");
+const lowerEl = document.getElementById("lower");
+const symbolEl = document.getElementById("symbol");
+const generateEl = document.getElementById("generate");
+const numberEl = document.getElementById("number");
+const upperLetters = "ABCDEFGHIJKLMNOPQSRTUVWXYZ";
+const lowerLetters = "abcdefghijklmnopqrstuvwxyz";
+const numbers = "0123456789";
+const symbol = "~!@#$%&*+";
+function getLowercase() {
+return lowerLetters[Math.floor(Math.random() * lowerLetters.length)];
+}
+function getUppercase() {
+return upperLetters[Math.floor(Math.random() * upperLetters.length)];
+}
+function getNumber() {
+return numbers[Math.floor(Math.random() * numbers.length)];
+}
+function getSymbol() {
+return symbol[Math.floor(Math.random() * symbol.length)];
+}
 function generatePassword() {
-  const length = lengthInput.value;
-  const hasUpper = upperInput.checked;
-  const hasLower = lowerInput.checked;
-  const hasNumber = numberInput.checked;
-  const hasSymbol = symbolInput.checked;
-
-  let password = '';
-  const characters = '';
-
-  if (hasUpper) characters += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  if (hasLower) characters += 'abcdefghijklmnopqrstuvwxyz';
-  if (hasNumber) characters += '0123456789';
-  if (hasSymbol) characters += '!@#$%^&*()_+-={}:<>?';
-
-  for (let i = 0; i < length; i++) {
-    password += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-
-  pwElement.textContent = password;
+const len = lenEl.value;
+let password = "";
+for (let i = 0; i < len; i++) {
+const x = generateX();
+password += x;
 }
-
-copyButton.addEventListener('click', copyPassword);
-
-function copyPassword() {
-  const password = pwElement.textContent;
-  navigator.clipboard.writeText(password);
-  alert('Password copied to clipboard!');
+PwEl.innerText = password;
 }
+function generateX() {
+const xs = [];
+if (upperEl.checked) {
+xs.push(getUppercase());
+}
+if (lowerEl.checked) {
+xs.push(getLowercase());
+}
+if (numberEl.checked) {
+xs.push(getNumber());
+}
+if (symbolEl.checked) {
+xs.push(getSymbol());
+}
+if (xs.length === 0) return "";
+return xs[Math.floor(Math.random() * xs.length)];
+}
+generateEl.addEventListener("click", generatePassword);
+copyEl.addEventListener("click", () => {
+const textarea = document.createElement("textarea");
+const password = PwEl.innerText;
+if (!password) {
+return;
+}
+textarea.value = password;
+document.body.appendChild(textarea);
+textarea.select();
+document.execCommand("copy");
+textarea.remove();
+});
