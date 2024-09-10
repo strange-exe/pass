@@ -385,3 +385,10 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+#result {
+  background-color: #f0f0f0; /* light gray background */
+  border: 1px solid #ccc; /* light gray border */
+  padding: 10px; /* add some padding */
+  font-size: 16px; /* increase font size */
+  font-family: monospace; /* use a monospace font */
+}
