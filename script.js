@@ -1,63 +1,75 @@
-const PwEl = document.getElementById("result");
-const copyEl = document.getElementById("copy");
-const lenEl = document.getElementById("len");
-const upperEl = document.getElementById("upper");
-const lowerEl = document.getElementById("lower");
-const symbolEl = document.getElementById("symbol");
-const generateEl = document.getElementById("generate");
-const numberEl = document.getElementById("number");
-const upperLetters = "ABCDEFGHIJKLMNOPQSRTUVWXYZ";
-const lowerLetters = "abcdefghijklmnopqrstuvwxyz";
-const numbers = "0123456789";
-const symbol = "~!@#$%&*+";
-function getLowercase() {
-return lowerLetters[Math.floor(Math.random() * lowerLetters.length)];
+const lengthSlider = document.querySelector(".pass-length input"),
+options = document.querySelectorAll(".option input"),
+copyIcon = document.querySelector(".input-box span"),
+passwordInput = document.querySelector(".input-box input"),
+passIndicator = document.querySelector(".pass-indicator"),
+generateBtn = document.querySelector(".generate-btn");
+
+const characters = { // object of letters, numbers & symbols
+    lowercase: "abcdefghijklmnopqrstuvwxyz",
+    uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    numbers: "0123456789",
+    symbols: "!$%&:.*+-#@~"
 }
-function getUppercase() {
-return upperLetters[Math.floor(Math.random() * upperLetters.length)];
+
+const generatePassword = () => {
+    let staticPassword = "",
+    randomPassword = "",
+    excludeDuplicate = false,
+    passLength = lengthSlider.value;
+
+    options.forEach(option => { // looping through each option's checkbox
+        if(option.checked) { // if checkbox is checked
+            // if checkbox id isn't exc-duplicate && spaces
+            if(option.id !== "exc-duplicate" && option.id !== "spaces") {
+                // adding particular key value from character object to staticPassword
+                staticPassword += characters[option.id];
+            } else if(option.id === "spaces") { // if checkbox id is spaces
+                staticPassword += `  ${staticPassword}  `; // adding space at the beginning & end of staticPassword
+            } else { // else pass true value to excludeDuplicate
+                excludeDuplicate = true;
+            }
+        }
+    });
+
+    for (let i = 0; i < passLength; i++) {
+        // getting random character from the static password
+        let randomChar = staticPassword[Math.floor(Math.random() * staticPassword.length)];
+        if(excludeDuplicate) { // if excludeDuplicate is true
+            // if randomPassword doesn't contains the current random character or randomChar is equal 
+            // to space " " then add random character to randomPassword else decrement i by -1
+            !randomPassword.includes(randomChar) || randomChar == " " ? randomPassword += randomChar : i--;
+        } else { // else add random character to randomPassword
+            randomPassword += randomChar;
+        }
+    }
+    passwordInput.value = randomPassword; // passing randomPassword to passwordInput value
 }
-function getNumber() {
-return numbers[Math.floor(Math.random() * numbers.length)];
+
+const upadatePassIndicator = () => {
+    // if lengthSlider value is less than 8 then pass "weak" as passIndicator id else if lengthSlider 
+    // value is less than 16 then pass "medium" as id else pass "strong" as id
+    passIndicator.id = lengthSlider.value <= 8 ? "weak" : lengthSlider.value <= 16 ? "medium" :  "strong";
 }
-function getSymbol() {
-return symbol[Math.floor(Math.random() * symbol.length)];
+
+const updateSlider = () => {
+    // passing slider value as counter text
+    document.querySelector(".pass-length span").innerText = lengthSlider.value;
+    generatePassword();
+    upadatePassIndicator();
 }
-function generatePassword() {
-const len = lenEl.value;
-let password = "";
-for (let i = 0; i < len; i++) {
-const x = generateX();
-password += x;
+updateSlider();
+
+const copyPassword = () => {
+    navigator.clipboard.writeText(passwordInput.value); // copying random password
+    copyIcon.innerText = "check"; // changing copy icon to tick
+    copyIcon.style.color = "#4285F4";
+    setTimeout(() => { // after 1500 ms, changing tick icon back to copy
+        copyIcon.innerText = "copy_all";
+        copyIcon.style.color = "#707070";
+    }, 1500);
 }
-PwEl.innerText = password;
-}
-function generateX() {
-const xs = [];
-if (upperEl.checked) {
-xs.push(getUppercase());
-}
-if (lowerEl.checked) {
-xs.push(getLowercase());
-}
-if (numberEl.checked) {
-xs.push(getNumber());
-}
-if (symbolEl.checked) {
-xs.push(getSymbol());
-}
-if (xs.length === 0) return "";
-return xs[Math.floor(Math.random() * xs.length)];
-}
-generateEl.addEventListener("click", generatePassword);
-copyEl.addEventListener("click", () => {
-const textarea = document.createElement("textarea");
-const password = PwEl.innerText;
-if (!password) {
-return;
-}
-textarea.value = password;
-document.body.appendChild(textarea);
-textarea.select();
-document.execCommand("copy");
-textarea.remove();
-});
+
+copyIcon.addEventListener("click", copyPassword);
+lengthSlider.addEventListener("input", updateSlider);
+generateBtn.addEventListener("click", generatePassword);
