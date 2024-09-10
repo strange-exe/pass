@@ -8,40 +8,102 @@
 </head>
 <body>
     <div class="container">
-    <h2 class="title">Password Generator</h2>
-    <div class="result">
-        <div class="result__title field-title">Generated Password</div>
-        <div class="result__info right">click to copy</div>
-        <div class="result__info left">copied</div>
-        <div class="result__viewbox" id="result">CLICK GENERATE</div>
-        <button id="copy-btn" style="--x: 0; --y: 0"><i class="far fa-copy"></i></button>
-    </div>
-    <div class="length range__slider" data-min="4" data-max="32">
-        <div class="length__title field-title" data-length='0'>length:</div>
-        <input id="slider" type="range" min="4" max="32" value="16" />
+        <h2 class="title">Password Generator</h2>
+        <div class="result">
+            <div class="result__title field-title">Generated Password</div>
+            <div class="result__info right">click to copy</div>
+            <div class="result__info left">copied</div>
+            <input type="text" id="result" readonly>
+            <button id="copy-btn"><i class="far fa-copy"></i></button>
+        </div>
+        <div class="length range__slider" data-min="4" data-max="32">
+            <div class="length__title field-title" data-length='0'>length:</div>
+            <input id="slider" type="range" min="4" max="32" value="16" />
+        </div>
+
+        <div class="settings">
+            <span class="settings__title field-title">settings</span>
+            <div class="setting">
+                <label class="switch">
+                    <input type="checkbox" id="uppercase" checked />
+                    <span class="slider round"></span>
+                </label>
+                <label for="uppercase">Include Uppercase</label>
+            </div>
+            <div class="setting">
+                <label class="switch">
+                    <input type="checkbox" id="lowercase" checked />
+                    <span class="slider round"></span>
+                </label>
+                <label for="lowercase">Include Lowercase</label>
+            </div>
+            <div class="setting">
+                <label class="switch">
+                    <input type="checkbox" id="number" checked />
+                    <span class="slider round"></span>
+                </label>
+                <label for="number">Include Numbers</label>
+            </div>
+            <div class="setting">
+                <label class="switch">
+                    <input type="checkbox" id="symbol" />
+                    <span class="slider round"></span>
+                </label>
+                <label for="symbol">Include Symbols</label>
+            </div>
+        </div>
+
+        <button class="btn generate" id="generate">Generate Password</button>
     </div>
 
-    <div class="settings">
-        <span class="settings__title field-title">settings</span>
-        <div class="setting">
-            <input type="checkbox" id="uppercase" checked />
-            <label for="uppercase">Include Uppercase</label>
-        </div>
-        <div class="setting">
-            <input type="checkbox" id="lowercase" checked />
-            <label for="lowercase">Include Lowercase</label>
-        </div>
-        <div class="setting">
-            <input type="checkbox" id="number" checked />
-            <label for="number">Include Numbers</label>
-        </div>
-        <div class="setting">
-            <input type="checkbox" id="symbol" />
-            <label for="symbol">Include Symbols</label>
-        </div>
-    </div>
+    <script>
+        const resultInput = document.getElementById('result');
+        const copyBtn = document.getElementById('copy-btn');
+        const generateBtn = document.getElementById('generate');
+        const slider = document.getElementById('slider');
+        const uppercaseCheckbox = document.getElementById('uppercase');
+        const lowercaseCheckbox = document.getElementById('lowercase');
+        const numberCheckbox = document.getElementById('number');
+        const symbolCheckbox = document.getElementById('symbol');
 
-    <button class="btn generate" id="generate">Generate Password</button>
-</div>
+        generateBtn.addEventListener('click', generatePassword);
+        copyBtn.addEventListener('click', copyPassword);
+
+        function generatePassword() {
+            const length = slider.value;
+            const hasUppercase = uppercaseCheckbox.checked;
+            const hasLowercase = lowercaseCheckbox.checked;
+            const hasNumber = numberCheckbox.checked;
+            const hasSymbol = symbolCheckbox.checked;
+
+            let password = '';
+            const possibleChars = '';
+
+            if (hasUppercase) {
+                possibleChars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            }
+            if (hasLowercase) {
+                possibleChars += 'abcdefghijklmnopqrstuvwxyz';
+            }
+            if (hasNumber) {
+                possibleChars += '0123456789';
+            }
+            if (hasSymbol) {
+                possibleChars += '!@#$%^&*()_+-={}:<>?';
+            }
+
+            for (let i = 0; i < length; i++) {
+                password += possibleChars.charAt(Math.floor(Math.random() * possibleChars.length));
+            }
+
+            resultInput.value = password;
+        }
+
+        function copyPassword() {
+            resultInput.select();
+            document.execCommand('copy');
+            alert('Password copied to clipboard!');
+        }
+    </script>
 </body>
 </html>
