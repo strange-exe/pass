@@ -1,4 +1,4 @@
-const PwEl = document.getElementById("pw");
+const PwEl = document.getElementById("result");
 const copyEl = document.getElementById("copy");
 const lenEl = document.getElementById("len");
 const upperEl = document.getElementById("upper");
