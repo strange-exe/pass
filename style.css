@@ -228,7 +228,7 @@ input[type="checkbox"]:checked+.slider:before {
   margin: 0.94rem 0 1.3rem;
 }
 
-.btn.generate {
+.generate-btn {
   -webkit-user-select: none;
   user-select: none;
   position: relative;
