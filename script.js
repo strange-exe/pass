@@ -58,7 +58,7 @@ const updateSlider = () => {
     generatePassword();
     upadatePassIndicator();
 }
-
+updateSlider();
 const copyPassword = () => {
     navigator.clipboard.writeText(passwordInput.value); // copying random password
     copyIcon.innerText = "check"; // changing copy icon to tick
@@ -71,10 +71,5 @@ const copyPassword = () => {
 
 copyIcon.addEventListener("click", copyPassword);
 lengthSlider.addEventListener("input", updateSlider);
-document.addEventListener('DOMContentLoaded', () => {
-  const generateBtn = document.querySelector(".generate-btn");
-  generateBtn.addEventListener('click', () => {
-    generatePassword();
-  });
-  updateSlider();
-});
+generateBtn.addEventListener("click", generatePassword);
+
