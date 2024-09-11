@@ -113,8 +113,9 @@ input[type="checkbox"]:checked+.slider:before {
 
 
 .pass-settings {
-  color:color-mix(in hsl shorter hue, #ee0e85 49%, rgb(250, 244, 244) 31%,firebrick 20%);
+  color: mix(hsl(0, 0%, 50%), #ee0e85, 49%, rgb(250, 244, 244), 31%, firebrick, 20%);
   font-weight: bold;
+}
 }
 .wrapper{
   margin: 1.25rem 1.75rem;
@@ -137,7 +138,7 @@ input[type="checkbox"]:checked+.slider:before {
 .input-box span{
   position: absolute;
   right: 13px;
-  cursor: pointer;
+  cursor: copy;
   line-height: 53px;
   color: #707070;
 }
@@ -198,6 +199,7 @@ input[type="checkbox"]:checked+.slider:before {
 }
 .options .option:first-child{
   pointer-events: none;
+  cursor: no-drop;
 }
 .options .option:first-child input{
   opacity: 0.7;
@@ -233,7 +235,7 @@ input[type="checkbox"]:checked+.slider:before {
   width: 100%;
   height: 50px;
   margin: 10px 0;
-  border-radius: $field-border-radius;
+  border-radius: 5px;
   color: #fff;
   border: none;
   background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
