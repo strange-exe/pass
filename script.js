@@ -71,7 +71,9 @@ const copyPassword = () => {
 
 copyIcon.addEventListener("click", copyPassword);
 lengthSlider.addEventListener("input", updateSlider);
-generateBtn.addEventListener('click', () => {
-  updateSlider();
+document.addEventListener('DOMContentLoaded', () => {
+  generateBtn.addEventListener('click', () => {
+    generatePassword();
+  });
 });
 updateSlider();
