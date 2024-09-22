@@ -244,20 +244,14 @@ input[type="checkbox"]:checked+.slider:before {
   text-transform: uppercase;
   cursor: pointer;
   transition: all 150ms ease;
-  /* Add the following styles */
-  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.08);
-  padding: 0.94rem 0;
-  font-size: 1.06rem;
-}
 
-.generate-btn:hover {
-  background-image: linear-gradient(135deg, #4285F4 0%, #764ba2 100%);
-  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.12);
+  &:active {
+    transform: translateY(-3%);
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.08);
+  }
 }
-
-.generate-btn:active {
-  transform: translateY(-3%);
-  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.08);
+a:hover {
+  color: #222;
 }
 
 .github-corner svg {
