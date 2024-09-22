@@ -24,11 +24,26 @@ body{
   border: 1px solid rgba(255, 255, 255, 0.125);
   }
 }
-.container{
+/* Default styles for PC */
+.container {
   width: 450px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  /* other styles */
+}
+
+/* Styles for mobile devices */
+@media only screen and (max-width: 768px) {
+  .container {
+    width: 300px;
+    /* other styles */
+  }
+}
+
+/* Styles for smaller mobile devices */
+@media only screen and (max-width: 480px) {
+  .container {
+    width: 200px;
+    /* other styles */
+  }
 }
 .container h2{
   font-weight: 600;
