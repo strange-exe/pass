@@ -24,29 +24,11 @@ body{
   border: 1px solid rgba(255, 255, 255, 0.125);
   }
 }
-/* Default styles for PC */
-.container {
+.container{
   width: 450px;
-  /* other styles */
-}
-.wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.input-box, .pass-indicator, .pass-length, .pass-settings {
-  flex-basis: 30%; /* adjust the width of each element */
-  margin: 10px;
-}
-
-@media only screen and (max-width: 768px) {
-  .wrapper {
-    flex-direction: column;
-  }
-  .input-box, .pass-indicator, .pass-length, .pass-settings {
-    flex-basis: 100%; /* make each element full-width on mobile */
-  }
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
 }
 .container h2{
   font-weight: 600;
@@ -249,21 +231,27 @@ input[type="checkbox"]:checked+.slider:before {
 .generate-btn {
   -webkit-user-select: none;
   user-select: none;
-  background-color: #fff;
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin: 10px 0;
+  border-radius: 5px;
+  color: #fff;
   border: none;
-  border-radius: 10px;
-  padding: 10px 20px;
-  font-size: 16px;
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  letter-spacing: 1px;
   font-weight: bold;
-  color: #333;
+  text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px rgba(255, 255, 255, 0.1);
-}
+  transition: background-color 0.3s ease;
 
-.generate-btn:hover {
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.2);
-}
+  &:active {
+    transform: translateY(-3%);
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.08);
   }
+}
+a:hover {
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 .github-corner svg {
