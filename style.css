@@ -1,36 +1,36 @@
 /* Import Google font - Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-*{
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
-body{
+body {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: #4285F4;
-/* Background styles */
-  background-image: url('bg.png');
+  background: #4285f4;
+  /* Background styles */
+  background-image: url("bg.png");
   background-position: center;
-/* Glassmorphism card effect */
-.container {
-  -webkit-backdrop-filter: blur(6px) saturate(200%);
-  backdrop-filter: blur(6px) saturate(200%);
-  background-color: rgba(17, 25, 40, 0.79);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.125);
+  /* Glassmorphism card effect */
+  .container {
+    -webkit-backdrop-filter: blur(6px) saturate(200%);
+    backdrop-filter: blur(6px) saturate(200%);
+    background-color: rgba(17, 25, 40, 0.79);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
   }
 }
-.container{
+.container {
   width: 450px;
   background: #fff;
   border-radius: 8px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
 }
-.container h2{
+.container h2 {
   font-weight: 600;
   font-size: 1.31rem;
   padding: 1rem 1.75rem;
@@ -73,12 +73,12 @@ body{
   transition: 0.4s;
 }
 
-input[type="checkbox"]:checked+.slider {
+input[type="checkbox"]:checked + .slider {
   background-color: #ee0e85;
   /* Change the switch color here */
 }
 
-input[type="checkbox"]:checked+.slider:before {
+input[type="checkbox"]:checked + .slider:before {
   transform: translateX(20px);
 }
 
@@ -94,7 +94,6 @@ input[type="checkbox"]:checked+.slider:before {
   outline: none;
   padding: 0;
   margin: 0;
-
 }
 .pass-length input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -111,19 +110,25 @@ input[type="checkbox"]:checked+.slider:before {
   transform: scale(1.2);
 }
 
-
 .pass-settings {
-  color: mix(hsl(0, 0%, 50%), #ee0e85, 49%, rgb(250, 244, 244), 31%, firebrick, 20%);
+  color: mix(
+    hsl(0, 0%, 50%),
+    #ee0e85,
+    49%,
+    rgb(250, 244, 244),
+    31%,
+    firebrick,
+    20%
+  );
   font-weight: bold;
 }
-}
-.wrapper{
+.wrapper {
   margin: 1.25rem 1.75rem;
 }
-.wrapper .input-box{
+.wrapper .input-box {
   position: relative;
 }
-.input-box input{
+.input-box input {
   width: 100%;
   height: 53px;
   color: #09f3e7;
@@ -135,17 +140,17 @@ input[type="checkbox"]:checked+.slider:before {
   border: 1px solid #aaa;
   padding: 0 2.85rem 0 1rem;
 }
-.input-box span{
+.input-box span {
   position: absolute;
   right: 13px;
   cursor: copy;
   line-height: 53px;
   color: #707070;
 }
-.input-box span:hover{
-  color: #0cd1ef!important;
+.input-box span:hover {
+  color: #0cd1ef !important;
 }
-.wrapper .pass-indicator{
+.wrapper .pass-indicator {
   width: 100%;
   height: 4px;
   position: relative;
@@ -153,7 +158,7 @@ input[type="checkbox"]:checked+.slider:before {
   margin-top: 0.75rem;
   border-radius: 25px;
 }
-.pass-indicator::before{
+.pass-indicator::before {
   position: absolute;
   content: "";
   height: 100%;
@@ -161,66 +166,66 @@ input[type="checkbox"]:checked+.slider:before {
   border-radius: inherit;
   transition: width 0.3s ease;
 }
-.pass-indicator#weak::before{
+.pass-indicator#weak::before {
   width: 20%;
-  background: #E64A4A;
+  background: #e64a4a;
 }
-.pass-indicator#medium::before{
+.pass-indicator#medium::before {
   width: 50%;
   background: #0b2af1;
 }
-.pass-indicator#strong::before{
+.pass-indicator#strong::before {
   width: 100%;
   background: #08e41e;
 }
-.wrapper .pass-length{
+.wrapper .pass-length {
   margin: 1.56rem 0 1.25rem;
 }
-.pass-length .details{
+.pass-length .details {
   display: flex;
   justify-content: space-between;
-  color:#f72cf3;
+  color: #f72cf3;
 }
-.pass-length input{
+.pass-length input {
   width: 100%;
   height: 5px;
 }
-.pass-settings .options{
+.pass-settings .options {
   display: flex;
   list-style: none;
   flex-wrap: wrap;
   margin-top: 1rem;
 }
-.pass-settings .options .option{
+.pass-settings .options .option {
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
   width: calc(100% / 2);
 }
-.options .option:first-child{
+.options .option:first-child {
   pointer-events: none;
   cursor: no-drop;
 }
-.options .option:first-child input{
+.options .option:first-child input {
   opacity: 0.7;
 }
-.options .option input{
+.options .option input {
   height: 16px;
   width: 16px;
   cursor: pointer;
 }
-.options .option label{
+.options .option label {
   cursor: pointer;
   color: #7a15e6;
   padding-left: 0.63rem;
 }
-.wrapper .generate-btn{
+.wrapper .generate-btn {
   width: 100%;
   color: #fff;
   border: none;
   outline: none;
   cursor: pointer;
-  background: #4285F4;
+  background: #4285f4;
   font-size: 1.06rem;
   padding: 0.94rem 0;
   border-radius: 5px;
@@ -265,11 +270,10 @@ a:hover {
 }
 
 .github-corner:hover .octo-arm {
-  animation: octocat-wave .56s;
+  animation: octocat-wave 0.56s;
 }
 
 @keyframes octocat-wave {
-
   0%,
   100% {
     transform: rotate(0);
