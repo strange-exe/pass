@@ -17,11 +17,12 @@
         <h2>Password Generator</h2>
         <div class="wrapper">
             <div class="input-box">
-                <input type="text" disabled>
+                <input type="text" id="passwordDisplay" disabled>
                 <span class="material-symbols-rounded" aria-label="Copy to clipboard">copy_all</span>
             </div>
 
             <div class="pass-indicator"></div>
+            <div class="crack-time" id="crackTime">Estimated crack time: <span>calculating...</span></div>
 
             <div class="pass-length">
                 <div class="details">
@@ -29,7 +30,7 @@
                     <span></span>
                 </div>
                 <div class="range-wrapper">
-                    <input type="range" min="5" max="30" value="10" step="1" id="slider">
+                    <input type="range" min="5" max="20" value="10" step="1" id="slider">
                 </div>
             </div>
 
