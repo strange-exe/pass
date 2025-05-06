@@ -1,4 +1,3 @@
-/* Import Google font - Poppins */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 
 * {
@@ -13,31 +12,33 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: #4285f4;
-  background-image: url("bg.png");
+  background: #f3e5f5;
+  background-image: url("bg.jpg");
   background-position: center;
+  background-size: cover;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
 }
 
 .container {
-  -webkit-backdrop-filter: blur(6px) saturate(200%);
-  backdrop-filter: blur(6px) saturate(200%);
-  background-color: rgba(17, 25, 40, 0.79);
+  -webkit-backdrop-filter: blur(6px) saturate(180%);
+  backdrop-filter: blur(6px) saturate(180%);
+  background-color: rgba(40, 55, 84, 0.79);
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.125);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   max-width: 90%;
   width: 450px;
-  border-radius: 8px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .container h2 {
   font-weight: 600;
   font-size: 1.31rem;
   padding: 1rem 1.75rem;
-  border-bottom: 1px solid #d4dbe5;
+  border-bottom: 1px solid #ddd;
+  color: #000000;
 }
 
-/* Switch styles */
 .switch {
   position: relative;
   display: inline-block;
@@ -57,7 +58,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #020000;
+  background-color: #c5cae9;
   border-radius: 20px;
   transition: 0.4s;
 }
@@ -75,35 +76,37 @@ body {
 }
 
 input[type="checkbox"]:checked+.slider {
-  background-color: #ee0e85;
+  background-color: #089703;
 }
 
 input[type="checkbox"]:checked+.slider:before {
   transform: translateX(20px);
 }
 
-/* Slider styles */
 .pass-length input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 1px;
+  height: 6px;
   border-radius: 10px;
-  background: #ffffff;
+  background-color: #afabf7;
+  background-image: linear-gradient(#6c63ff, #6c63ff);
+  background-repeat: no-repeat;
+  background-size: 50% 100%;
   outline: none;
-  padding: 0;
-  margin: 0;
+  transition: background-size 0.2s ease;
 }
 
 .pass-length input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 20px;
-  height: 20px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  background: #fff;
+  background: #f9f9f9;
   cursor: pointer;
   transition: 0.2s;
+  box-shadow: 0 0 0 1px #6c63ff;
 }
 
 .pass-length input[type="range"]:active::-webkit-slider-thumb {
@@ -111,7 +114,7 @@ input[type="checkbox"]:checked+.slider:before {
 }
 
 .pass-settings {
-  color: #ee0e85;
+  color: #000000;
   font-weight: bold;
 }
 
@@ -150,30 +153,12 @@ input[type="checkbox"]:checked+.slider:before {
 
 .wrapper .pass-indicator {
   width: 100%;
-  height: 4px;
-  position: relative;
-  background: #dfdfdf;
-  margin-top: 0.75rem;
-  border-radius: 25px;
-}
-
-.pass-indicator::before {
-  position: absolute;
-  content: "";
-  height: 100%;
-  width: 50%;
-  border-radius: inherit;
-  transition: width 0.3s ease;
-}
-
-.pass-indicator {
-  position: relative;
-  width: 100%;
   height: 12px;
-  background: #eee;
+  background: #e7e0e0;
   border-radius: 50px;
   overflow: hidden;
   margin-top: 10px;
+  position: relative;
 }
 
 .pass-indicator::before {
@@ -187,58 +172,37 @@ input[type="checkbox"]:checked+.slider:before {
 
 .pass-indicator#veryweak::before {
   width: 15%;
-  background: linear-gradient(90deg, #ff4b2b, #ff416c);
+  background: linear-gradient(90deg, #ef9a9a, #f48fb1);
 }
 
 .pass-indicator#weak::before {
   width: 50%;
-  background: linear-gradient(90deg, #ff930f, #fff95b);
+  background: linear-gradient(90deg, #fbc02d, #fff59d);
 }
 
 .pass-indicator#moderate::before {
   width: 75%;
-  background: linear-gradient(90deg, #f9d423, #ff4e50);
+  background: linear-gradient(90deg, #ffb74d, #ffcc80);
 }
 
 .pass-indicator#strong::before {
   width: 100%;
-  background: linear-gradient(90deg, #64ed08, #a8e063);
+  background: linear-gradient(90deg, #81c784, #aed581);
 }
 
 .pass-indicator#verystrong::before {
   width: 100%;
-  background: linear-gradient(90deg, #04f620, #a8e063);
+  background: linear-gradient(90deg, #66bb6a, #b2ff59);
 }
 
-/* Optional: add a label */
 .strength-label {
   margin-top: 5px;
   text-align: right;
   font-size: 0.85rem;
   font-weight: bold;
-  color: #555;
+  color:#000000;
   text-transform: uppercase;
   transition: color 0.3s ease;
-}
-
-#veryweak+.strength-label {
-  color: #e64a4a;
-}
-
-#weak+.strength-label {
-  color: #db6a07;
-}
-
-#moderate+.strength-label {
-  color: #b2b400;
-}
-
-#strong+.strength-label {
-  color: #64ed08;
-}
-
-#verystrong+.strength-label {
-  color:#04f620
 }
 
 .wrapper .pass-length {
@@ -248,7 +212,7 @@ input[type="checkbox"]:checked+.slider:before {
 .pass-length .details {
   display: flex;
   justify-content: space-between;
-  color: #f72cf3;
+  color: #000000;
 }
 
 .pass-settings .options {
@@ -282,22 +246,22 @@ input[type="checkbox"]:checked+.slider:before {
 
 .options .option label {
   cursor: pointer;
-  color: #7a15e6;
+  color: #e042c1;
   padding-left: 0.63rem;
 }
 
 .wrapper .generate-btn {
   width: 100%;
-  color: #fff;
+  color: #f2f2f2;
   border: none;
   outline: none;
   cursor: pointer;
   font-size: 1.06rem;
   padding: 0.94rem 0;
-  border-radius: 5px;
+  border-radius: 8px;
   text-transform: uppercase;
   margin: 0.94rem 0 1.3rem;
-  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-image: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
   letter-spacing: 1px;
   font-weight: bold;
   transition: all 150ms ease;
@@ -306,10 +270,6 @@ input[type="checkbox"]:checked+.slider:before {
 .generate-btn:active {
   transform: translateY(-3%);
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0.08);
-}
-
-a:hover {
-  background-color: rgba(255, 255, 255, 0.4);
 }
 
 .github-corner svg {
@@ -343,14 +303,9 @@ a:hover {
     transform: rotate(10deg);
   }
 }
+
 #passwordDisplay {
-  font-family: monospace;
+  font-family: "Poppins";
   letter-spacing: 1px;
   transition: all 0.2s ease-in-out;
-}
-.crack-time {
-  margin-top: 0.75rem;
-  font-size: 0.9rem;
-  color: #090909;
-  font-weight: 500;
 }
