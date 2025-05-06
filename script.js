@@ -1,3 +1,5 @@
+let currentPassword = "";
+
 const lengthSlider = document.querySelector(".pass-length input");
 const options = document.querySelectorAll(".option input");
 const passwordInput = document.querySelector(".input-box input");
@@ -40,48 +42,31 @@ const generatePassword = () => {
         return;
     }
 
-    // Slot machine effect
-    let slotRolls = 4; // Number of rolls
-    let intervalSpeed = 100; // Speed of roll (in ms)
-    let finalPassword = ""; // The final generated password
-
-    const rollSlot = () => {
-        let tempPassword = "";
-        for (let i = 0; i < passLength; i++) {
-            let randomChar = staticPassword[Math.floor(Math.random() * staticPassword.length)];
-            tempPassword += randomChar;
-        }
-        passwordInput.value = tempPassword;
-    };
-
-    let interval = setInterval(() => {
-        rollSlot();
-        slotRolls--;
-        if (slotRolls === 0) {
-            clearInterval(interval); // Stop rolling when slotRolls reaches 0
-            // Now generate the final password
-            for (let i = 0; i < passLength; i++) {
-                let randomChar = staticPassword[Math.floor(Math.random() * staticPassword.length)];
-                if (excludeDuplicate) {
-                    if (!randomPassword.includes(randomChar) || randomChar == " ") {
-                        randomPassword += randomChar;
-                    } else {
-                        i--;
-                    }
-                } else {
-                    randomPassword += randomChar;
-                }
+    for (let i = 0; i < passLength; i++) {
+        let randomChar = staticPassword[Math.floor(Math.random() * staticPassword.length)];
+        if (excludeDuplicate) {
+            if (!randomPassword.includes(randomChar) || randomChar === " ") {
+                randomPassword += randomChar;
+            } else {
+                i--; 
             }
-            animatePasswordDisplay(randomPassword);
-            updatePassIndicator(randomPassword);
+        } else {
+            randomPassword += randomChar;
         }
-    }, intervalSpeed);
+    }
+
+    currentPassword = randomPassword;
+    passwordInput.value = currentPassword;
+    animatePasswordDisplay(currentPassword);
+    updatePassIndicator(currentPassword);
 };
 
 function animatePasswordDisplay(randomPassword) {
     const input = passwordInput;
 
-    input.value = ""; // Clear existing content
+    input.placeholder="           Generating....."
+
+    input.value = ""; 
     let i = 0;
 
     const interval = setInterval(() => {
@@ -91,40 +76,13 @@ function animatePasswordDisplay(randomPassword) {
     }, 50); // Adjust speed here (lower = faster)
 }
 
-function estimateCrackTime(randomPassword) {
+const updatePassIndicator = (password = currentPassword) => {
     let charsetSize = 0;
-    if (/[a-z]/.test(randomPassword)) charsetSize += 26;
-    if (/[A-Z]/.test(randomPassword)) charsetSize += 26;
-    if (/[0-9]/.test(randomPassword)) charsetSize += 10;
-    if (/[^A-Za-z0-9]/.test(randomPassword)) charsetSize += 33;
-    if (charsetSize === 0) charsetSize = 26;
-
-    const guessesPerSecond = 1e10;
-    const combinations = Math.pow(charsetSize, randomPassword.length);
-    const seconds = combinations / guessesPerSecond;
-
-    if (seconds < 1) return "instantly";
-    else if (seconds < 60) return `${Math.round(seconds)} seconds`;
-    else if (seconds < 3600) return `${Math.round(seconds / 60)} minutes`;
-    else if (seconds < 86400) return `${Math.round(seconds / 3600)} hours`;
-    else if (seconds < 31536000) return `${Math.round(seconds / 86400)} days`;
-    else if (seconds < 3153600000) return `${Math.round(seconds / 31536000)} years`;
-
-    const years = Math.round(seconds / 31536000);
-    if (years < 1e6) return `${years} years`;
-    if (years < 1e9) return `${Math.round(years / 1e6)} million years`;
-    if (years < 1e12) return `${Math.round(years / 1e9)} billion years`;
-    if (years < 1e15) return `${Math.round(years / 1e12)} trillion years`;
-    return "ETERNITY";
-}
-
-
-const updatePassIndicator = (password = passwordInput.value) => {
-    let charsetSize = 0;
-    if (/[a-z]/.test(password)) charsetSize += 26;
-    if (/[A-Z]/.test(password)) charsetSize += 26;
-    if (/[0-9]/.test(password)) charsetSize += 10;
+    if (/[a-z]/.test(password)) charsetSize += 26; 
+    if (/[A-Z]/.test(password)) charsetSize += 26; 
+    if (/[0-9]/.test(password)) charsetSize += 10; 
     if (/[^A-Za-z0-9]/.test(password)) charsetSize += 33;
+
     if (charsetSize === 0) charsetSize = 26;
 
     const guessesPerSecond = 1e10;
@@ -143,11 +101,17 @@ const updatePassIndicator = (password = passwordInput.value) => {
     document.getElementById("crackTime").innerText = `Estimated Crack Time: ${estimateCrackTime(password)}`;
 };
 
-
 const updateSlider = () => {
-    document.querySelector(".pass-length span").innerText = lengthSlider.value;
-    generatePassword();
-    updatePassIndicator();
+    const value = lengthSlider.value;
+    const min = lengthSlider.min;
+    const max = lengthSlider.max;
+
+    const percent = ((value - min) / (max - min)) * 100;
+
+    lengthSlider.style.backgroundSize = `${percent}% 100%`;
+
+    document.querySelector(".pass-length span").innerText = value;
+    
 };
 
 updateSlider();
@@ -163,5 +127,9 @@ const copyPassword = () => {
 };
 
 copyIcon.addEventListener("click", copyPassword);
-lengthSlider.addEventListener("input", updateSlider);
+lengthSlider.addEventListener("input", () => {
+    updateSlider();
+    generatePassword();
+    updatePassIndicator(currentPassword);
+});
 generateBtn.addEventListener("click", generatePassword);
