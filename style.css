@@ -13,7 +13,7 @@ body {
   justify-content: center;
   min-height: 100vh;
   background: #f3e5f5;
-  background-image: url("bg.png");
+  background-image: url("bg.jpg");
   background-position: center;
   background-size: cover;
   -webkit-backdrop-filter: blur(4px);
