@@ -61,6 +61,53 @@ const generatePassword = () => {
     updatePassIndicator(currentPassword);
 };
 
+function estimateCrackTime(password, algorithm = "sha1") {
+    // Realistic guesses per second based on algorithm
+    const guessRates = {
+        sha1: 1e10,     // Fast hash, GPU/ASIC
+        md5: 5e9,
+        bcrypt: 100,    // Intentionally slow hash
+        scrypt: 500,    // Tuned version
+        argon2: 500,
+        pbkdf2: 1000,
+        custom: 1e6     // Custom or fallback rate
+    };
+
+    const guessesPerSecond = guessRates[algorithm.toLowerCase()] || 1e6;
+
+    // Determine charset size
+    let charsetSize = 0;
+    if (/[a-z]/.test(password)) charsetSize += 26;
+    if (/[A-Z]/.test(password)) charsetSize += 26;
+    if (/[0-9]/.test(password)) charsetSize += 10;
+    if (/[^A-Za-z0-9]/.test(password)) charsetSize += 33;
+
+    if (charsetSize === 0) charsetSize = 26; // default: lowercase
+
+    // Total combinations = charsetSize ^ passwordLength
+    const totalGuesses = Math.pow(charsetSize, password.length);
+
+    // Time in seconds
+    const seconds = totalGuesses / guessesPerSecond;
+
+    // Convert seconds to human-readable time
+    function formatTime(seconds) {
+        if (seconds < 1) return "instantly";
+        if (seconds < 60) return `${Math.round(seconds)} seconds`;
+        if (seconds < 3600) return `${Math.round(seconds / 60)} minutes`;
+        if (seconds < 86400) return `${Math.round(seconds / 3600)} hours`;
+        if (seconds < 31536000) return `${Math.round(seconds / 86400)} days`;
+        if (seconds < 3153600000) return `${Math.round(seconds / 31536000)} years`;
+
+        const years = seconds / 31536000;
+        if (years < 1e6) return `${Math.round(years)} years`;
+        if (years < 1e9) return `${Math.round(years / 1e6)} million years`;
+        return `${Math.round(years / 1e9)} billion years`;
+    }
+
+    return formatTime(seconds);
+  }
+
 function animatePasswordDisplay(randomPassword) {
     const input = passwordInput;
 
@@ -98,7 +145,7 @@ const updatePassIndicator = (password = currentPassword) => {
                     ? "moderate"
                     : "strong";
 
-    document.getElementById("crackTime").innerText = `Estimated Crack Time: ${estimateCrackTime(password)}`;
+    document.getElementById("Time").innerText = `${estimateCrackTime(password)}`;
 };
 
 const updateSlider = () => {
